@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Masterpiece'|trans({'%id%': task.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'Masterpiece'|trans({'%id%': task.id|default('')}) }}</h1>
+    <br>
+    {% if task is defined and task|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'Created'|trans }}</dt>
+            <dd>{{ task.createdAt|format_date('long') }}</dd>
+            <dt>{{ 'Updated'|trans }}</dt>
+            <dd>{{ task.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'Title'|trans }}</dt>
+            <dd>{{  task.title }}</dd>
+            <dt>{{ 'Category'|trans }}</dt>
+            <dd>{{  task.category.title }}</dd>
+        </dl>
+        <p>
+            <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'Back to masterpiece list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'No masterpieces found :('|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
